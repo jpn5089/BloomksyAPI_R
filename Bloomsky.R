@@ -7,9 +7,11 @@ library(jsonlite)
 
 options(stringsAsFactors = FALSE)
 
+key <- Sys.getenv("BLOOMSKY_API_KEY")
+
 url <- "https://api.bloomsky.com/api/skydata/?format=json"
 
-raw <-GET(url=url, add_headers(Authorization = "your_api_key"))
+raw <-GET(url=url, add_headers(Authorization = key))
 
 this.raw.content <- rawToChar(raw$content)
 this.content <- fromJSON(this.raw.content, simplifyVector = FALSE)
