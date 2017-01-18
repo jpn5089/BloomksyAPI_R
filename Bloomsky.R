@@ -9,7 +9,7 @@ options(stringsAsFactors = FALSE)
 
 url <- "https://api.bloomsky.com/api/skydata/?format=json"
 
-raw <-GET(url=url, add_headers(Authorization = "ueCzsdrWveDYntCov6OY59rRh9vUtsae"))
+raw <-GET(url=url, add_headers(Authorization = "your_api_key"))
 
 this.raw.content <- rawToChar(raw$content)
 this.content <- fromJSON(this.raw.content, simplifyVector = FALSE)
