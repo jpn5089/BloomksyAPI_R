@@ -5,20 +5,19 @@ library(ggplot2)
 library(httr)
 library(jsonlite)
 
-#API: ueCzsdrWveDYntCov6OY59rRh9vUtsae
 options(stringsAsFactors = FALSE)
 
-url <- "https://api.bloomsky.com/"
+url <- "https://api.bloomsky.com/api/skydata/?format=json"
 
-path <- "api/skydata/?api_key='Authorization': ueCzsdrWveDYntCov6OY59rRh9vUtsae"
+raw <-GET(url=url, add_headers(Authorization = "ueCzsdrWveDYntCov6OY59rRh9vUtsae"))
 
+this.raw.content <- rawToChar(raw$content)
+this.content <- fromJSON(this.raw.content, simplifyVector = FALSE)
+this.content
 
-
-GET(url = url, path = path)
-
-raw <- GET(url = url)
-
-names(raw)
+#####################################################################################
+### Manual Download of csv file                                                   ###
+#####################################################################################
 
 bloomsky <- read.csv(file = "C:\\Users\\John\\Downloads\\BloomSky_JP's Wx Station_01-02-17@0248PM-01-03-17@0248PM.csv") %>%
   mutate(Temperature = round((1.8*Temperature + 32),2)) %>%
